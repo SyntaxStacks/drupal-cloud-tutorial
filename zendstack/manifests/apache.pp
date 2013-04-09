@@ -3,7 +3,7 @@ class zendstack::apache {
 
   file { 'default.conf':
     path    => '/etc/apache2/sites-available/default',
-    source  => 'puppet:///modules/drupalstack/default.conf',
+    source  => 'puppet:///modules/zendstack/default.conf',
     ensure  => present,
     require => Package['apache2'],
     notify  => Service['apache2-service'],
