@@ -1,4 +1,4 @@
-class drupalstack::apache {
+class zendstack::apache {
   package { 'apache2': ensure => present, }
 
   file { 'default.conf':
