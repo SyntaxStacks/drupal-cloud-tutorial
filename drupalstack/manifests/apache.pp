@@ -1,9 +1,9 @@
 class drupalstack::apache {
   package { 'apache2': ensure => present, }
 
-  file { 'drupal.conf':
+  file { 'default.conf':
     path    => '/etc/apache2/sites-available/default',
-    source  => 'puppet:///modules/drupalstack/drupal.conf',
+    source  => 'puppet:///modules/drupalstack/default.conf',
     ensure  => present,
     require => Package['apache2'],
     notify  => Service['apache2-service'],
