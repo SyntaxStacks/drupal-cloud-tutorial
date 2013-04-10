@@ -1,10 +1,10 @@
-class zendstack::zand_app {
-  package { 'curl': ensure => present,}
+class zendstack::zend_app {
+  package { curl: ensure => present,}
 
   exec {'install-composer':
-    command => 'curl -sS https://getcomposer.org/installer | php -- --install-dir=bin',
-    ensure  => present,
-    require => Package['curl'],
+    command => 'curl -sS https://getcomposer.org/installer | php -- --install-dir=/bin',
+    path => ['/usr/bin'],
+    require => Package['curl'], 
   }
   
   file {'/var/www/ZendApp':
@@ -13,6 +13,8 @@ class zendstack::zand_app {
   }
 
   exec {'create-skeleton-zend-app':
-    command => 'php composer.phar create-project --repository-url="http://packages.zendframework.com" zendframework/skeleton-application /var/www/ZendApp'
+    command => 'php /bin/composer.phar create-project --repository-url="http://packages.zendframework.com" zendframework/skeleton-application /var/www/ZendApp',
+    path => ["/usr/bin"],
+    require => [ File['/var/www/ZendApp'], Exec['install-composer']],
   }
 }
